@@ -20,7 +20,8 @@ function Home() {
         setisloading(false);
       })
       .catch((error) => {
-        window.alert(error);
+        window.alert(
+          error);
       });
   }, []);
 
