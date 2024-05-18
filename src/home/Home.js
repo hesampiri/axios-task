@@ -1,8 +1,9 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import Section from "../Section/Section";
 import PaginationRounded from "../Pagination/Pagination";
 import CircularIndeterminate from "../Progress";
+import { ApiCaller } from "../ApiCaller";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [posts, setposts] = useState([]);
@@ -10,11 +11,9 @@ function Home() {
   const [currentPage, setcurrentPage] = useState(1);
   const [postPerPage] = useState(25);
 
-  const URL = "https://jsonplaceholder.typicode.com/posts";
-
   useEffect(() => {
     setisloading(true);
-    axios.get(URL)
+    ApiCaller('/posts')
       .then((res) => {
         setposts([...res.data]);
         setisloading(false);
@@ -25,9 +24,11 @@ function Home() {
       });
   }, []);
 
+
   const indexOfLastpost = currentPage * postPerPage ; 
   const indexOfFirstpost = indexOfLastpost - postPerPage ; 
   const currentposts = posts.slice(indexOfFirstpost , indexOfLastpost);
+  const pages = posts.length / postPerPage ;
 
   const paginate = (pagenumebr)=>{setcurrentPage(pagenumebr)}
 
@@ -35,9 +36,13 @@ function Home() {
   return (
     <>
       <h2 className="text-center text-lg font-bold p-4 flex justify-center">Home Page</h2>
-      {/* <Section posts={currentposts} loading={isloading} pagenumebr={paginate} /> */}
+      <div className="bg-pink-400 text-center p-3">
+        <Link to={'/comments'}>
+          <button className="bg-pink-600 p-1 rounded font-bold text-white">Go to Comments Page</button>
+        </Link>
+      </div>
       {isloading ? <CircularIndeterminate/> : <Section posts={currentposts} loading={isloading} pagenumebr={paginate} /> }
-      <PaginationRounded paginate={paginate} />
+      <PaginationRounded paginate={paginate} number={Math.round(pages)}  />
     </>
   );
 }

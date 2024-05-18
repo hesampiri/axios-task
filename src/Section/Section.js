@@ -5,7 +5,7 @@ function Section({ posts, loading }) {
 
   return (
     <>
-    <div className="flex flex-wrap justify-center py-4 gap-4 bg-blue-600">
+    <div className="flex flex-wrap justify-center py-4 gap-4 bg-blue-600 h-full">
       {posts.map((post) => {
         return loading ? <Variants/> : <BasicCard key={post.id} infos={post}/>
       })}
