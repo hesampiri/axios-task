@@ -10,7 +10,7 @@ function Comment({ info }) {
       validationSchema={Yup.object({
         name:Yup.string().required('required').min(4 , "must have 4 character or more"),
         email:Yup.string().required('required').email(),
-        body:Yup.string().min(20).max(200)
+        body:Yup.string().min(20).max(200).required()
       })}
       onSubmit={(values)=>{
         alert(JSON.stringify(values))
