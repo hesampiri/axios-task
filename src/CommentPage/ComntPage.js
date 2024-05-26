@@ -33,7 +33,7 @@ function ComntPage(){
 
     useEffect(()=>{
         setisloading(true);
-        ApiCaller('/comments' , null , inputvalue)
+        ApiCaller('/comments' , null , null , inputvalue)
         .then((res)=>{
             setcomments([...res.data])
             setisloading(false) 

@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export const ApiCaller = (param , id , query)=>{
+export const ApiCaller = (route , id , path , query)=>{
         
-    const Url =`https://jsonplaceholder.typicode.com${param}/${id ||''}` 
+    const Url =`https://jsonplaceholder.typicode.com${route}/${id ||''}${path||''}` 
 
-    const config = {
+    const config = { 
         url : query ? `${Url}?postId=${query}`: Url ,
     }
 
